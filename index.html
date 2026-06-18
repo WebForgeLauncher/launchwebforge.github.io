@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WebForge Launcher</title>
+        <!-- Your awesome custom favicon goes here -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <style>
+            /* Dark arcade background */
+            body {
+                background-color: #0d0e15;
+                color: #ffffff;
+                font-family: 'Courier New', Courier, monospace;
+                text-align: center;
+                padding: 40px;
+            }
+
+            /* Glowing Title */
+            h1 {
+                color: #00ffff;
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #8a2be2;
+                font-size: 2.5rem;
+            }
+
+            /* The grid layout that aligns the cards automatically */
+            .game-grid {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+                flex-wrap: wrap;
+                margin-top: 50px;
+            }
+
+            /* Base style for every game card */
+            .game-card {
+                background-color: #161925;
+                border-radius: 12px;
+                padding: 25px;
+                width: 220px;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+            /* Hover effect: Makes the cards float up when mouse rolls over */
+            .game-card:hover {
+                transform: translateY(-10px);
+            }
+
+            /* Purple glow card */
+            .item-purple { border: 3px solid #8a2be2; }
+            .item-purple:hover { box-shadow: 0 0 20px #8a2be2; }
+
+            /* Cyan glow card */
+            .item-cyan { border: 3px solid #00ffff; }
+            .item-cyan:hover { box-shadow: 0 0 20px #00ffff; }
+
+            .pixel-icon { font-size: 3rem; margin-bottom: 10px; }
+
+            /* Glowing Launch Buttons */
+            .play-btn {
+                display: inline-block;
+                background-color: #ffffff;
+                color: #0d0e15;
+                padding: 10px 20px;
+                text-decoration: none;
+                font-weight: bold;
+                border-radius: 5px;
+                margin-top: 15px;
+            }
+            .play-btn:hover {
+                background-color: #00ffff;
+                box-shadow: 0 0 10px #00ffff;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>⚡ WEBFORGE GAME LAUNCHER ⚡</h1>
+            <p>Select a digital tool or video game below</p>
+        </header>
+        <!-- This grid holds all your games/tools -->
+        <div class="game-grid">
+            <!-- Game Card 1 -->
+            <div class="game-card item-purple">
+                <div class="pixel-icon">🏋</div>
+                <h3>Gym Simulator</h3>
+                <p>The ultimate fitness simulation experience.</p>
+                <a href="games/gym-simulator.html" class="play-btn" target="_blank">LAUNCH</a>
+            </div>
+
+            <!-- Game Card 2 -->
+            <div class="game-card item-cyan">
+                <div class="pixel-icon">🧮</div>
+                <h3>Advanced Calculator</h3>
+                <p>A powerful calculator for complex mathematical operations.</p>
+                <a href="tools/calculator.html" class="play-btn" target="_blank">LAUNCH</a>
+            </div>
+
+            <!-- Game Card 3 -->
+            <div class="game-card item-purple">
+                <div class="pixel-icon">👾</div>
+                <h3>Net Spawn</h3>
+                <p>Multiplayer arcade space shooter.</p>
+                <a href="games/spawn.html" class="play-btn" target="_blank">LAUNCH</a>
+            </div>
+
+            <!-- Game Card 4 -->
+            <div class="game-card item-cyan">
+                <div class="pixel-icon">�️</div>
+                <h3>Pixel Adventure</h3>
+                <p>An exciting platformer game with retro aesthetics.</p>
+                <a href="games/adventure.html" class="play-btn" target="_blank">LAUNCH</a>
+            </div>
+
+            <!-- Game Card 5 -->
+            <div class="game-card item-purple">
+                <div class="pixel-icon">❎🅾️❎🅾️</div>
+                <h3>Tic Tac Toe</h3>
+                <p>Play the classic game of Tic Tac Toe.</p>
+                <a href="games/tic-tac-toe.html" class="play-btn" target="_blank">LAUNCH</a>
+            </div>
+        </div>
+        <FollowUP>
+            <p>© 2023 WebForge. All rights reserved.</p>
+        </FollowUP>
+    </body>
+</html>
