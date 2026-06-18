@@ -1,0 +1,329 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link href="favicon.ico" rel="icon" type="image/x-icon"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.7.0/math.min.js"></script>
+        <title>WebForge Calculator Pro</title> 
+        <style> 
+            /* Rainbow Flashing Title Animation */
+            @keyframes rgb-rainbow {
+                0% { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
+                20% { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+                40% { color: #8a2be2; text-shadow: 0 0 10px #8a2be2; }
+                60% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+                80% { color: #ffcc00; text-shadow: 0 0 10px #ffcc00; }
+                100% { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
+            }
+
+            .into-main-page { 
+                font-family: 'Alfa Slab One', sans-serif; 
+                font-weight: 1000; 
+                font-size: 48px; 
+                text-align: center; 
+            } 
+            
+            .a-when-asked { 
+                text-decoration: none; 
+                animation: rgb-rainbow 6s linear infinite; 
+            } 
+
+            * { 
+                margin:0; 
+                padding:0; 
+                box-sizing:border-box; 
+            } 
+            body { 
+                font-family:Arial,sans-serif; 
+                background:#0d0e15; 
+                color:white; 
+                padding:20px; 
+                transition:.3s; 
+            } 
+            body.light { 
+                background:#f4f4f4; 
+                color:black; 
+            } 
+            .top-bar { 
+                display:flex; 
+                justify-content:space-between; 
+                align-items:center; 
+                margin-bottom:20px; 
+            } 
+            .toggle-btn { 
+                border:none; 
+                padding:12px 16px; 
+                border-radius:10px; 
+                cursor:pointer; 
+                background: #1f1f1f;
+                color: white;
+                border: 1px solid #333;
+            } 
+            body.light .toggle-btn {
+                background: #ddd;
+                color: black;
+            }
+            .calculator-container { 
+                display:grid; 
+                grid-template-columns:1fr 1fr; 
+                gap:20px; 
+            } 
+            .calculator { 
+                background:#161925; 
+                border-radius:15px; 
+                padding:20px; 
+                border: 2px solid #222;
+            } 
+            body.light .calculator { 
+                background:white; 
+                color:black; 
+                border: 2px solid #ddd;
+            } 
+            .display{ 
+                background:black; 
+                color: #00ffff; 
+                text-shadow: 0 0 5px #00ffff;
+                border-radius:10px; 
+                min-height:70px; 
+                padding:15px; 
+                margin-bottom:15px; 
+                font-size:28px; 
+                display:flex; 
+                justify-content:flex-end; 
+                align-items:center; 
+                overflow-x:auto; 
+                border: 1px solid #333;
+            } 
+            body.light .display { 
+                background:#ddd; 
+                color:black; 
+                text-shadow: none;
+            } 
+            .buttons { 
+                display:grid; 
+                grid-template-columns:repeat(5,1fr); 
+                gap:10px; 
+            } 
+            button { 
+                border:none; 
+                border-radius:10px; 
+                padding:15px; 
+                cursor:pointer; 
+                font-size:18px; 
+                font-weight: bold;
+                transition: all 0.2s ease;
+            } 
+
+            .number { 
+                background:#252838; 
+                color:white; 
+                border: 1px solid #444;
+            } 
+            .number:hover {
+                background: #2f334a;
+                border-color: #00ffff;
+                box-shadow: 0 0 10px #00ffff;
+            }
+
+            .operator { 
+                background:#ff9800; 
+                color:white; 
+            } 
+            .operator:hover {
+                box-shadow: 0 0 12px #ff9800;
+            }
+
+            .control { 
+                background:#d32f2f; 
+                color:white; 
+            } 
+            .control:hover {
+                box-shadow: 0 0 12px #d32f2f;
+            }
+
+            .equals { 
+                background:#8a2be2; 
+                color:white; 
+            } 
+            .equals:hover {
+                box-shadow: 0 0 15px #8a2be2;
+            }
+
+            body.light button {
+                box-shadow: none !important;
+            }
+
+            .center-zero { 
+                grid-column:2; 
+            } 
+            @media(max-width:900px) { 
+                .calculator-container{ 
+                    grid-template-columns:1fr; 
+                } 
+            } 
+        </style> 
+    </head> 
+    <body> 
+        <div class="into-main-page"> 
+            <a href="https://webforge.co" target="_blank" class="a-when-asked">WEBFORGE</a> 
+        </div> 
+        <div class="top-bar"> 
+            <h1>Calculator Pro</h1> 
+            <button class="toggle-btn" onclick="toggleTheme()" > 🌙 / ☀️ </button> 
+        </div> 
+        <div class="calculator-container"> 
+            <div class="calculator"> 
+                <h2>Standard</h2> 
+                <div class="display" id="display-std" > 0 </div> 
+                <div class="buttons" id="standard-buttons" ></div> 
+            </div> 
+            <div class="calculator"> 
+                <h2>Scientific</h2> 
+                <div class="display" id="display-sci" > 0 </div> 
+                <div class="buttons" id="scientific-buttons" ></div> 
+            </div> 
+        </div> 
+        <footer style="text-align:center;margin-top:30px;color:#888;margin-bottom:0px;background-color:#161925;padding:20px;border-radius:15px;border: 1px solid #222;"> 
+            <p>&copy; 2026 WebForge. All rights reserved.</p> 
+            <br>
+            <h3 style="margin-top:15px; color:white;">About</h3> 
+            <h4 style="font-weight:normal; padding:0 20px; margin-top:5px;">Calculator is a simple yet powerful tool for performing basic and scientific calculations. From simple calculations to complex scientific equations, this calculator has you covered with a wide range of functions.</h4> 
+            <br>
+            <a href="https://webforge.co" target="_blank" style="color:#00ffff; text-decoration:none;">Visit our website for more!</a> 
+            <h3 style="margin-top:15px; color:white;">Contact</h3> 
+            <h4 style="font-weight:normal; margin-top:5px;">If you have any questions, feedback, or suggestions, feel free to reach out to us at <a href="mailto:gio.antoni.song@gmail.com" target="_blank" style="color:#00ffff;">gio.antoni.song@gmail.com</a></h4> 
+        </footer> 
+
+        <script> 
+            const state = { std: "", sci: "" }; 
+
+            function updateDisplay(id){ 
+                document.getElementById( `display-${id}` ).textContent = state[id] || "0"; 
+            } 
+
+            function append(value,id){ 
+                state[id] += value; 
+                updateDisplay(id); 
+            } 
+
+            function clearDisplay(id){ 
+                state[id] = ""; 
+                updateDisplay(id); 
+            } 
+
+            function backspace(id){ 
+                state[id] = state[id].slice(0,-1); 
+                updateDisplay(id); 
+            } 
+
+            function factorial(n){ 
+                n = Math.floor(n); 
+                if(n < 0){ return NaN; } 
+                let result = 1; 
+                for(let i=2;i<=n;i++){ result *= i; } 
+                return result; 
+            } 
+
+            function evaluateExpression(id) {
+                try {
+                    let expression = state[id];
+
+                    expression = expression.replace(/π/g, Math.PI);
+                    expression = expression.replace(/\be\b/g, Math.E);
+
+                    expression = expression.replace(
+                        /(\d+)!/g,
+                        (_, num) => factorial(num)
+                    );
+
+                    expression = expression.replace(
+                        /sin\((.*?)\)/g,
+                        (_, x) => Math.sin(math.evaluate(x) * Math.PI / 180)
+                    );
+
+                    expression = expression.replace(
+                        /cos\((.*?)\)/g,
+                        (_, x) => Math.cos(math.evaluate(x) * Math.PI / 180)
+                    );
+
+                    expression = expression.replace(
+                        /tan\((.*?)\)/g,
+                        (_, x) => Math.tan(math.evaluate(x) * Math.PI / 180)
+                    );
+
+                    expression = expression.replace(
+                        /log\((.*?)\)/g,
+                        (_, x) => Math.log10(math.evaluate(x))
+                    );
+
+                    expression = expression.replace(
+                        /ln\((.*?)\)/g,
+                        (_, x) => Math.log(math.evaluate(x))
+                    );
+
+                    expression = expression.replace(
+                        /sqrt\((.*?)\)/g,
+                        (_, x) => Math.sqrt(math.evaluate(x))
+                    );
+
+                    const result = math.evaluate(expression);
+
+                    if (!isFinite(result) || isNaN(result)) {
+                        throw new Error();
+                    }
+
+                    state[id] = Number(result.toFixed(10)).toString();
+                    updateDisplay(id);
+
+                } catch {
+                    state[id] = "Error";
+                    updateDisplay(id);
+                }
+            }
+
+            function toggleTheme(){ 
+                document.body.classList.toggle( "light" ); 
+            } 
+
+            function createButton( container, text, className, callback, extraClass="" ){ 
+                const button = document.createElement( "button" ); 
+                button.textContent = text; 
+                button.className = className + " " + extraClass; 
+                button.onclick = callback; 
+                container.appendChild( button ); 
+            } 
+
+            const standardButtons = document.getElementById( "standard-buttons" ); 
+            [ 
+                ["C","control",()=>clearDisplay("std")], ["⌫","control",()=>backspace("std")], ["/","operator",()=>append("/","std")], ["*","operator",()=>append("*","std")], 
+                ["7","number",()=>append("7","std")], ["8","number",()=>append("8","std")], ["9","number",()=>append("9","std")], ["-","operator",()=>append("-","std")], 
+                ["4","number",()=>append("4","std")], ["5","number",()=>append("5","std")], ["6","number",()=>append("6","std")], ["+","operator",()=>append("+","std")], 
+                ["1","number",()=>append("1","std")], ["2","number",()=>append("2","std")], ["3","number",()=>append("3","std")], ["=","equals",()=>evaluateExpression("std")], 
+                ["0","number",()=>append("0","std"),"center-zero"], [".","number",()=>append(".","std")] 
+            ].forEach(btn=>{ 
+                createButton( standardButtons, btn[0], btn[1], btn[2], btn[3]||"" ); 
+            }); 
+
+            const scientificButtons = document.getElementById( "scientific-buttons" ); 
+            [ 
+                ["C","control",()=>clearDisplay("sci")], ["⌫","control",()=>backspace("sci")], ["(","number",()=>append("(","sci")], [")","number",()=>append(")","sci")], 
+                ["sin","operator",()=>append("sin(","sci")], ["cos","operator",()=>append("cos(","sci")], ["tan","operator",()=>append("tan(","sci")], ["√","operator",()=>append("sqrt(","sci")], 
+                ["log","operator",()=>append("log(","sci")], ["ln","operator",()=>append("ln(","sci")], ["π","operator",()=>append("π","sci")], ["e","operator",()=>append("e","sci")], 
+                ["7","number",()=>append("7","sci")], ["8","number",()=>append("8","sci")], ["9","number",()=>append("9","sci")], ["/","operator",()=>append("/","sci")], 
+                ["4","number",()=>append("4","sci")], ["5","number",()=>append("5","sci")], ["6","number",()=>append("6","sci")], ["*","operator",()=>append("*","sci")], 
+                ["1","number",()=>append("1","sci")], ["2","number",()=>append("2","sci")], ["3","number",()=>append("3","sci")], ["-","operator",()=>append("-","sci")], 
+                ["0","number",()=>append("0","sci")], [".","number",()=>append(".","sci")], ["+","operator",()=>append("+","sci")], ["=","equals",()=>evaluateExpression("sci")], 
+                ["x²","operator",()=>append("^2","sci")], ["x^y","operator",()=>append("^","sci")], ["!","operator",()=>append("!","sci")] 
+            ].forEach(btn=>{ 
+                createButton( scientificButtons, btn[0], btn[1], btn[2] ); 
+            }); 
+
+            updateDisplay("std"); 
+            updateDisplay("sci"); 
+        </script> 
+    </body> 
+</html>
